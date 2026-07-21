@@ -91,3 +91,4 @@ company-rag/
 ├── requirements.txt    ← Python dependencies
 └── README.md           ← This file
 ```
+# documind
