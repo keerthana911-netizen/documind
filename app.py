@@ -17,7 +17,6 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaLLM
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnablePassthrough
 from sentence_transformers import SentenceTransformer
 from pymilvus import (
     connections,
@@ -218,12 +217,7 @@ Answer (be concise and accurate):""")
 
     llm = OllamaLLM(model=OLLAMA_MODEL, temperature=0.1)
 
-    chain = (
-        {"context": RunnablePassthrough(), "question": RunnablePassthrough()}
-        | prompt
-        | llm
-        | StrOutputParser()
-    )
+    chain = prompt | llm | StrOutputParser()
     return chain.invoke({"context": context, "question": question})
 
 
